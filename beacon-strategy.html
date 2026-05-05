@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beacon Strategy Consulting — Strategy & Policy Rooted in Purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0e1e2f;
+    --ink-soft: #2a3a4d;
+    --parchment: #f5efe2;
+    --parchment-deep: #ebe2cf;
+    --beacon: #d4a253;
+    --beacon-deep: #b88736;
+    --sea: #2f5a5b;
+    --rule: rgba(14,30,47,0.12);
+    --shadow: 0 24px 48px -28px rgba(14,30,47,0.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(14,30,47,0.05) 1px, transparent 0);
+    background-size: 28px 28px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .display{
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  .display em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--beacon-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  .eyebrow{
+    font-family: "Public Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{
+    content:"";display:inline-block;
+    width:24px;height:1px;background:var(--beacon-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  nav.site{
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(245,239,226,0.78);
+    border-bottom: 1px solid transparent;
+    transition: padding .3s ease, border-color .3s ease, background .3s ease;
+    padding: 22px 0;
+  }
+  nav.site.scrolled{
+    padding: 12px 0;
+    border-color: var(--rule);
+  }
+  nav .wrap{
+    max-width: 1240px; margin: 0 auto;
+    padding: 0 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .brand-mark{
+    width:32px;height:32px;border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, var(--beacon) 0%, var(--beacon-deep) 60%, var(--ink) 100%);
+    box-shadow: 0 0 0 2px var(--parchment), 0 0 24px rgba(212,162,83,0.4);
+    flex-shrink:0;
+    position:relative;
+  }
+  .brand-mark::after{
+    content:"";position:absolute;inset:-8px;border-radius:50%;
+    border:1px solid var(--beacon);
+    opacity:.3;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{transform:scale(1);opacity:.3}
+    50%{transform:scale(1.15);opacity:0}
+  }
+  .brand-name{
+    font-family:"Fraunces",serif;font-size:18px;font-weight:600;letter-spacing:-0.01em;
+  }
+  nav ul{list-style:none;display:flex;gap:36px;align-items:center}
+  nav a.link{
+    text-decoration:none;color:var(--ink-soft);font-size:14px;font-weight:500;
+    position:relative;padding:4px 0;transition:color .2s;
+  }
+  nav a.link::after{
+    content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+    background:var(--beacon-deep);transition:right .3s ease;
+  }
+  nav a.link:hover{color:var(--ink)}
+  nav a.link:hover::after{right:0}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding: 12px 22px;
+    font-family:"Public Sans",sans-serif;font-size:14px;font-weight:600;
+    text-decoration:none;
+    border-radius: 999px;
+    transition: all .25s ease;
+    cursor:pointer;border:none;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary{
+    background: var(--ink); color: var(--parchment);
+  }
+  .btn-primary:hover{
+    background: var(--beacon-deep); transform: translateY(-1px);
+    box-shadow: 0 12px 24px -12px rgba(184,135,54,0.5);
+  }
+  .btn-primary .arrow{transition: transform .25s}
+  .btn-primary:hover .arrow{transform: translateX(4px)}
+  .btn-ghost{
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .btn-ghost:hover{background: var(--ink); color: var(--parchment)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    padding: 80px 0 100px;
+    overflow:hidden;
+    z-index: 1;
+  }
+  .hero .wrap{
+    max-width: 1240px; margin: 0 auto; padding: 0 32px;
+    display:grid; grid-template-columns: 1.15fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .hero h1{
+    font-size: clamp(44px, 5.4vw, 76px);
+    margin: 24px 0 28px;
+  }
+  .hero p.lede{
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 540px; margin-bottom: 36px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-meta{
+    margin-top: 56px;
+    display:flex;gap:48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    max-width: 540px;
+  }
+  .hero-meta div{flex:1}
+  .hero-meta strong{
+    font-family: "Fraunces", serif; font-weight: 600;
+    font-size: 32px; display:block; line-height:1;
+    color: var(--ink);
+  }
+  .hero-meta span{font-size: 13px; color: var(--ink-soft); display:block; margin-top:8px}
+
+  /* ---------- DASHBOARD WIDGET ---------- */
+  .dashboard{
+    position: relative;
+    background: var(--ink);
+    border-radius: 20px;
+    padding: 28px;
+    color: var(--parchment);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .dashboard::before{
+    content:"";position:absolute;
+    top:-50%;right:-30%;width:80%;height:140%;
+    background: radial-gradient(circle, rgba(212,162,83,0.18) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  .dash-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom: 22px;font-size: 12px;
+  }
+  .dash-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    color: rgba(245,239,226,0.6);
+    letter-spacing:0.12em;text-transform:uppercase;font-weight:600;font-size:11px;
+  }
+  .dash-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--beacon);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink{
+    0%,100%{opacity:1;box-shadow: 0 0 0 0 rgba(212,162,83,0.6)}
+    50%{opacity:.5;box-shadow: 0 0 0 8px rgba(212,162,83,0)}
+  }
+  .dash-time{color: rgba(245,239,226,0.5);font-variant-numeric: tabular-nums}
+  .dash-metrics{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom: 24px;
+  }
+  .metric{
+    background: rgba(245,239,226,0.04);
+    border: 1px solid rgba(245,239,226,0.08);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .metric-label{
+    font-size: 11px; color: rgba(245,239,226,0.55);
+    text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
+    margin-bottom:8px;
+  }
+  .metric-value{
+    font-family:"Fraunces",serif;font-weight:500;font-size: 30px;line-height:1;
+    color: var(--parchment);
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-delta{
+    font-size: 12px;color: var(--beacon);margin-top:6px;
+    display:flex;align-items:center;gap:4px;
+  }
+  .dash-chart{
+    height: 130px;
+    position: relative;
+    margin-top: 8px;
+  }
+  .bars{
+    position:absolute;inset:0;
+    display:flex;align-items:flex-end;gap:8px;padding-bottom: 22px;
+  }
+  .bar{
+    flex:1;
+    background: linear-gradient(to top, var(--beacon-deep), var(--beacon));
+    border-radius: 3px 3px 0 0;
+    transform-origin: bottom;
+    animation: growBar 1.2s cubic-bezier(.2,.8,.2,1) backwards;
+    opacity: 0.85;
+  }
+  .bar:nth-child(1){height: 35%; animation-delay: 0.1s}
+  .bar:nth-child(2){height: 50%; animation-delay: 0.18s}
+  .bar:nth-child(3){height: 42%; animation-delay: 0.26s}
+  .bar:nth-child(4){height: 65%; animation-delay: 0.34s}
+  .bar:nth-child(5){height: 58%; animation-delay: 0.42s}
+  .bar:nth-child(6){height: 78%; animation-delay: 0.50s}
+  .bar:nth-child(7){height: 70%; animation-delay: 0.58s}
+  .bar:nth-child(8){height: 88%; animation-delay: 0.66s}
+  .bar:nth-child(9){height: 82%; animation-delay: 0.74s}
+  .bar:nth-child(10){height: 95%; animation-delay: 0.82s; background: linear-gradient(to top, var(--beacon), #f0c977)}
+  .bar:nth-child(11){height: 100%; animation-delay: 0.90s; background: linear-gradient(to top, var(--beacon), #f0c977)}
+  .bar:nth-child(12){height: 92%; animation-delay: 0.98s; background: linear-gradient(to top, var(--beacon), #f0c977)}
+  @keyframes growBar{
+    from{transform: scaleY(0);opacity:0}
+    to{transform: scaleY(1);opacity: 0.85}
+  }
+  .axis{
+    position: absolute;left:0;right:0;bottom:0;
+    display:flex;justify-content:space-between;
+    font-size:10px;color:rgba(245,239,226,0.4);
+    letter-spacing:0.05em;
+  }
+  .dash-foot{
+    margin-top: 18px; padding-top: 16px;
+    border-top: 1px solid rgba(245,239,226,0.08);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size: 12px; color: rgba(245,239,226,0.6);
+  }
+  .dash-foot strong{color: var(--parchment); font-weight: 600}
+  .dash-decor{
+    position: absolute;
+    width: 200px;height:200px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    top: -100px; right: -100px;
+    z-index: -1;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0;
+    background: rgba(235,226,207,0.4);
+    position: relative;z-index:1;
+  }
+  .trust .wrap{
+    max-width: 1240px;margin:0 auto;padding: 0 32px;
+    display:flex;align-items:center;gap:48px;flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .trust-label{
+    font-size: 12px; letter-spacing: 0.15em; text-transform:uppercase;
+    color: var(--ink-soft);font-weight:600;
+  }
+  .trust-logos{
+    display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+  }
+  .trust-logos span{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size: 18px;color: var(--ink-soft);opacity:.65;
+    transition: opacity .25s;
+  }
+  .trust-logos span:hover{opacity: 1}
+
+  /* ---------- SECTION ---------- */
+  section{position: relative; z-index: 1}
+  .section{
+    padding: 120px 0;
+  }
+  .section .wrap{
+    max-width: 1240px;margin:0 auto;padding: 0 32px;
+  }
+  .section-head{
+    display:grid;grid-template-columns: 1fr 1.5fr;gap:80px;margin-bottom: 72px;
+    align-items: end;
+  }
+  .section-head h2{
+    font-size: clamp(32px, 4vw, 56px);
+  }
+  .section-head p{
+    color: var(--ink-soft);font-size: 18px;
+    max-width: 580px;
+  }
+
+  /* ---------- MISSION ---------- */
+  .mission{
+    background: var(--parchment-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .mission .wrap{
+    display:grid;grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .mission-image{
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .mission-image img{
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.85) contrast(1.05);
+  }
+  .mission-image::before{
+    content:"";position:absolute;inset:0;
+    background: linear-gradient(180deg, transparent 50%, rgba(14,30,47,0.4) 100%);
+    z-index: 1;
+  }
+  .mission-image .badge{
+    position: absolute; bottom: 24px; left: 24px;
+    background: var(--parchment); color: var(--ink);
+    padding: 14px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    z-index: 2;
+    display:flex;align-items:center;gap:8px;
+    letter-spacing: 0.02em;
+  }
+  .mission-image .badge::before{
+    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background: var(--beacon-deep);
+  }
+  .mission-content h2{
+    font-size: clamp(32px, 4vw, 52px);margin: 20px 0 32px;
+  }
+  .mv-block{
+    margin-bottom: 32px;
+    padding-left: 24px;
+    border-left: 2px solid var(--beacon);
+  }
+  .mv-label{
+    font-family: "Fraunces",serif;font-style:italic;font-weight:500;
+    font-size: 18px; color: var(--beacon-deep);
+    margin-bottom: 8px;
+  }
+  .mv-text{font-size: 17px; color: var(--ink-soft); line-height: 1.65}
+
+  /* ---------- SERVICES ---------- */
+  .services{padding-top: 140px}
+  .services .section-head{margin-bottom: 56px}
+  .service-cards{display:grid;grid-template-columns: 1fr 1fr 1fr; gap: 24px}
+  .card{
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 36px 32px;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -24px rgba(14,30,47,0.2);
+    border-color: var(--ink-soft);
+  }
+  .card.open{
+    background: var(--ink);
+    color: var(--parchment);
+    border-color: var(--ink);
+  }
+  .card-num{
+    font-family: "Fraunces", serif; font-style: italic;
+    font-size: 14px; font-weight: 500;
+    color: var(--beacon-deep);
+    margin-bottom: 28px; display:block;
+  }
+  .card.open .card-num{color: var(--beacon)}
+  .card h3{
+    font-family: "Fraunces", serif; font-weight: 500;
+    font-size: 30px; line-height: 1.1; margin-bottom: 16px;
+  }
+  .card h3 em{font-style: italic; color: var(--beacon-deep)}
+  .card.open h3 em{color: var(--beacon)}
+  .card-blurb{
+    font-size: 15px; color: var(--ink-soft);
+    line-height: 1.55; margin-bottom: 24px;
+  }
+  .card.open .card-blurb{color: rgba(245,239,226,0.75)}
+  .card-tags{
+    display: flex; flex-wrap:wrap; gap:8px; margin-bottom: 20px;
+  }
+  .tag{
+    font-size: 12px; padding: 5px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-soft);font-weight: 500;
+    background: rgba(255,255,255,0.4);
+  }
+  .card.open .tag{
+    border-color: rgba(245,239,226,0.2);
+    color: rgba(245,239,226,0.85);
+    background: rgba(245,239,226,0.05);
+  }
+  .card-expand{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+  }
+  .card.open .card-expand{
+    max-height: 500px;
+  }
+  .card-expand-inner{
+    padding-top: 20px; margin-top: 20px;
+    border-top: 1px solid rgba(245,239,226,0.15);
+  }
+  .card-expand h4{
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--beacon); font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .card-expand ul{list-style: none; padding: 0; margin-bottom: 24px}
+  .card-expand li{
+    padding: 8px 0; font-size: 14px;
+    border-bottom: 1px solid rgba(245,239,226,0.08);
+    display:flex;align-items:center;gap:10px;
+  }
+  .card-expand li::before{
+    content:""; width:5px;height:5px;border-radius:50%;background: var(--beacon);
+    flex-shrink:0;
+  }
+  .card-expand li:last-child{border-bottom:none}
+  .card-toggle{
+    position:absolute;top: 32px;right: 32px;
+    width:36px;height:36px;border-radius:50%;
+    border: 1px solid var(--rule);
+    background: transparent;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition: all .3s;
+  }
+  .card.open .card-toggle{
+    background: var(--beacon);border-color: var(--beacon);
+  }
+  .card-toggle svg{transition: transform .3s}
+  .card.open .card-toggle svg{transform: rotate(45deg)}
+  .card.open .card-toggle path{stroke: var(--ink)}
+
+  /* ---------- DIAGNOSTIC ---------- */
+  .diagnostic{
+    background: var(--ink);
+    color: var(--parchment);
+    position: relative;overflow: hidden;
+  }
+  .diagnostic::before{
+    content:"";position:absolute;
+    top:-30%;left:-10%;width:60%;height:120%;
+    background: radial-gradient(circle, rgba(212,162,83,0.15) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .diagnostic .wrap{
+    max-width: 980px; margin: 0 auto; padding: 0 32px;
+    text-align: center; position:relative;
+  }
+  .diagnostic .eyebrow{color: var(--beacon)}
+  .diagnostic .eyebrow::before{background: var(--beacon)}
+  .diagnostic h2{
+    font-size: clamp(36px, 4.5vw, 64px);margin: 24px 0 18px;
+  }
+  .diagnostic h2 em{color: var(--beacon)}
+  .diagnostic > .wrap > p.intro{
+    color: rgba(245,239,226,0.65);
+    max-width: 580px; margin: 0 auto 56px;
+    font-size: 18px;
+  }
+  .diag-stage{
+    position: relative;
+    min-height: 360px;
+  }
+  .diag-step{
+    display: none;
+    text-align: left;
+    max-width: 740px;margin: 0 auto;
+    animation: fadeUp .5s ease backwards;
+  }
+  .diag-step.active{display: block}
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .progress{
+    display:flex;justify-content:center;gap: 8px;margin-bottom: 40px;
+  }
+  .progress span{
+    width: 32px; height: 3px; border-radius: 2px;
+    background: rgba(245,239,226,0.15);
+    transition: background .3s;
+  }
+  .progress span.done{background: var(--beacon)}
+  .progress span.current{background: var(--beacon); box-shadow: 0 0 12px var(--beacon)}
+  .diag-q{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size: clamp(24px, 3vw, 36px); line-height: 1.2;
+    margin-bottom: 32px;text-align:center;letter-spacing:-0.01em;
+  }
+  .diag-options{
+    display:grid;grid-template-columns: 1fr 1fr 1fr;gap: 16px;
+  }
+  .diag-opt{
+    background: rgba(245,239,226,0.04);
+    border: 1px solid rgba(245,239,226,0.15);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all .25s;
+    color: var(--parchment);
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .diag-opt:hover{
+    background: rgba(245,239,226,0.08);
+    border-color: var(--beacon);
+    transform: translateY(-2px);
+  }
+  .diag-opt.selected{
+    background: var(--beacon); color: var(--ink);
+    border-color: var(--beacon);
+  }
+  .diag-opt .num{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size: 13px; opacity: 0.6;
+    margin-bottom: 12px;display:block;
+  }
+  .diag-opt .label{
+    font-weight: 600;font-size: 16px;
+    margin-bottom: 6px;display:block;
+  }
+  .diag-opt .desc{
+    font-size: 13px;opacity: 0.7;line-height: 1.5;display:block;
+  }
+  .diag-opt.selected .num,
+  .diag-opt.selected .desc{opacity: 0.85}
+  .diag-nav{
+    display:flex;justify-content:space-between;margin-top: 40px;
+    padding-top:24px;border-top: 1px solid rgba(245,239,226,0.1);
+  }
+  .diag-back{
+    background:transparent;border:none;cursor:pointer;
+    color: rgba(245,239,226,0.6);font-family:inherit;font-size:14px;
+    padding: 10px 0;
+  }
+  .diag-back:hover{color: var(--parchment)}
+  .diag-back:disabled{opacity:.3;cursor:not-allowed}
+  .diag-next{
+    background: var(--beacon);color: var(--ink);
+    padding: 12px 28px;border-radius: 999px;border:none;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:14px;
+    transition: all .25s;
+  }
+  .diag-next:hover{background: #f0c977; transform: translateX(4px)}
+  .diag-next:disabled{opacity:.3;cursor:not-allowed;transform:none}
+
+  /* RESULT */
+  .diag-result{
+    display:none;
+    text-align: left;max-width: 700px; margin: 0 auto;
+  }
+  .diag-result.active{display:block}
+  .diag-result-tag{
+    display:inline-block;
+    background: var(--beacon);color: var(--ink);
+    padding: 6px 14px;border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase;letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .diag-result h3{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.1; margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .diag-result h3 em{color: var(--beacon);font-style: italic}
+  .diag-result p{
+    color: rgba(245,239,226,0.75);font-size:17px;line-height:1.65;
+    margin-bottom: 32px;
+  }
+  .diag-result-actions{
+    display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .diag-result .btn-primary{
+    background: var(--beacon); color: var(--ink);
+  }
+  .diag-result .btn-primary:hover{background: #f0c977}
+  .diag-result .btn-ghost{
+    color: var(--parchment); border-color: rgba(245,239,226,0.3);
+  }
+  .diag-result .btn-ghost:hover{
+    background: var(--parchment); color: var(--ink); border-color: var(--parchment);
+  }
+
+  /* ---------- QUOTE ---------- */
+  .quote{
+    padding: 140px 0;
+    text-align: center;
+    background: var(--parchment);
+    position: relative;
+  }
+  .quote .wrap{
+    max-width: 900px;margin: 0 auto; padding: 0 32px;
+  }
+  .quote-mark{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size: 96px;line-height:0.5;color: var(--beacon-deep);
+    margin-bottom: 24px;display:block;
+  }
+  .quote blockquote{
+    font-family:"Fraunces",serif;font-weight:400;
+    font-size: clamp(28px, 3.5vw, 44px);line-height:1.25;
+    letter-spacing:-0.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .quote blockquote em{color: var(--beacon-deep)}
+  .quote cite{
+    font-style: normal;
+    font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-soft);font-weight: 600;
+  }
+
+  /* ---------- WHY ---------- */
+  .why{
+    background: var(--parchment-deep);
+  }
+  .why .wrap{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .why-image{
+    position:relative;aspect-ratio: 1;
+    border-radius: 8px; overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .why-image img{
+    width:100%;height:100%;object-fit:cover;
+    filter: saturate(0.9) contrast(1.05);
+  }
+  .why h2{font-size: clamp(32px, 4vw, 52px); margin: 20px 0 32px}
+  .why-list{list-style:none;padding:0}
+  .why-list li{
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    display:grid;grid-template-columns: auto 1fr; gap: 24px; align-items:start;
+  }
+  .why-list li:last-child{border-bottom:none}
+  .why-num{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
+    font-size: 18px;color: var(--beacon-deep);
+    padding-top: 4px;
+  }
+  .why-item h4{
+    font-family:"Fraunces",serif;font-weight:500;font-size: 22px;
+    margin-bottom: 6px;letter-spacing: -0.01em;
+  }
+  .why-item p{font-size:15px; color: var(--ink-soft); line-height: 1.55}
+
+  /* ---------- CTA ---------- */
+  .cta-band{
+    padding: 120px 0;
+    background: var(--ink);
+    color: var(--parchment);
+    text-align: center;
+    position: relative;overflow:hidden;
+  }
+  .cta-band::before{
+    content:"";position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width: 800px;height:800px;border-radius:50%;
+    background: radial-gradient(circle, rgba(212,162,83,0.12) 0%, transparent 60%);
+  }
+  .cta-band .wrap{
+    max-width: 800px;margin: 0 auto;padding: 0 32px;position: relative;
+  }
+  .cta-band h2{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size: clamp(36px, 5vw, 64px);line-height:1.1;letter-spacing:-0.02em;
+    margin-bottom: 24px;
+  }
+  .cta-band h2 em{color: var(--beacon);font-style:italic}
+  .cta-band p{
+    color: rgba(245,239,226,0.7);font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .newsletter{
+    display:flex;max-width: 480px;margin: 0 auto;gap: 8px;
+    background: rgba(245,239,226,0.06);
+    border: 1px solid rgba(245,239,226,0.15);
+    border-radius: 999px;
+    padding: 6px;
+  }
+  .newsletter input{
+    flex:1;background:transparent;border:none;outline:none;
+    color: var(--parchment);font-family:inherit;font-size: 15px;
+    padding: 0 18px;
+  }
+  .newsletter input::placeholder{color: rgba(245,239,226,0.4)}
+  .newsletter button{
+    background: var(--beacon);color: var(--ink);
+    padding: 12px 24px;border-radius:999px;border:none;cursor:pointer;
+    font-family:inherit;font-weight: 600;font-size:14px;
+    transition: background .25s;
+  }
+  .newsletter button:hover{background: #f0c977}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--parchment);
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--rule);
+    position: relative;z-index: 1;
+  }
+  footer .wrap{
+    max-width: 1240px;margin: 0 auto; padding: 0 32px;
+  }
+  .foot-grid{
+    display:grid;grid-template-columns: 2fr 1fr 1fr 1fr;gap: 60px;
+    padding-bottom: 60px;border-bottom: 1px solid var(--rule);
+  }
+  .foot-brand p{
+    color: var(--ink-soft);font-size: 15px;
+    max-width: 320px;margin-top: 20px;line-height: 1.6;
+  }
+  .foot-col h5{
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 600; color: var(--ink); margin-bottom: 18px;
+  }
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom: 12px}
+  .foot-col a{
+    color: var(--ink-soft);text-decoration:none;font-size: 14px;
+    transition: color .2s;
+  }
+  .foot-col a:hover{color: var(--beacon-deep)}
+  .foot-bottom{
+    padding-top: 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap: 16px;
+    font-size: 13px;color: var(--ink-soft);
+  }
+  .foot-faith{
+    font-family:"Fraunces",serif;font-style:italic;
+    color: var(--beacon-deep);
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform: translateY(24px);transition: opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform: translateY(0)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px){
+    .hero .wrap, .mission .wrap, .why .wrap{grid-template-columns: 1fr; gap: 48px}
+    .section-head{grid-template-columns: 1fr; gap: 24px}
+    .service-cards{grid-template-columns: 1fr}
+    .diag-options{grid-template-columns: 1fr}
+    .foot-grid{grid-template-columns: 1fr 1fr;gap: 40px}
+    nav ul{display: none}
+    .section{padding: 80px 0}
+    .hero{padding: 48px 0 80px}
+    .trust .wrap{justify-content:flex-start}
+    .trust-logos{gap: 28px}
+    .hero-meta{flex-wrap:wrap;gap: 24px}
+  }
+  @media (max-width: 560px){
+    .hero-ctas{flex-direction:column;align-items:stretch}
+    .hero-ctas .btn{justify-content:center}
+    .foot-grid{grid-template-columns: 1fr}
+    .card{padding: 28px 24px}
+    .card-toggle{top:24px;right:24px}
+    nav .wrap{padding: 0 20px}
+    .section .wrap, .hero .wrap{padding: 0 20px}
+    .newsletter{flex-direction:column;border-radius: 16px;padding: 8px}
+    .newsletter input{padding: 14px 18px}
+    .newsletter button{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="site" id="nav">
+  <div class="wrap">
+    <a href="#" class="brand">
+      <span class="brand-mark"></span>
+      <span class="brand-name">Beacon Strategy</span>
+    </a>
+    <ul>
+      <li><a href="#mission" class="link">About</a></li>
+      <li><a href="#services" class="link">Services</a></li>
+      <li><a href="#diagnostic" class="link">Find Your Fit</a></li>
+      <li><a href="#" class="link">Our Team</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-primary">
+      Schedule a Consultation
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text reveal">
+      <span class="eyebrow">Atlanta · Public Sector Strategy</span>
+      <h1 class="display">Management consulting for <em>mission-driven</em> organizations.</h1>
+      <p class="lede">Through strategy, policy insight, and clear reporting, we help organizations turn information into actionable decisions that lead to measurable outcomes.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn btn-primary">Schedule a Consultation <span class="arrow">→</span></a>
+        <a href="#diagnostic" class="btn btn-ghost">Find Your Fit</a>
+      </div>
+      <div class="hero-meta">
+        <div>
+          <strong data-count="38">0</strong>
+          <span>Public-sector engagements</span>
+        </div>
+        <div>
+          <strong data-count="92">0</strong>
+          <span>Avg. policy alignment score</span>
+        </div>
+        <div>
+          <strong data-count="14">0</strong>
+          <span>Active partner agencies</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated dashboard widget -->
+    <div class="dashboard reveal" style="transition-delay: 0.15s">
+      <div class="dash-decor"></div>
+      <div class="dash-head">
+        <div class="dash-tag"><span class="dash-dot"></span> Live impact monitor</div>
+        <div class="dash-time" id="dashTime">—</div>
+      </div>
+      <div class="dash-metrics">
+        <div class="metric">
+          <div class="metric-label">Programs evaluated</div>
+          <div class="metric-value" data-count="247">0</div>
+          <div class="metric-delta">↑ 12.4% YoY</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Outcomes improved</div>
+          <div class="metric-value" data-count="82" data-suffix="%">0%</div>
+          <div class="metric-delta">↑ 8 pts vs baseline</div>
+        </div>
+      </div>
+      <div class="dash-chart">
+        <div class="bars">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="axis">
+          <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
+        </div>
+      </div>
+      <div class="dash-foot">
+        <span>Quarterly delivery cadence</span>
+        <strong>+18% efficiency</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="wrap">
+    <span class="trust-label">Working alongside</span>
+    <div class="trust-logos">
+      <span>Municipal Agencies</span>
+      <span>State Departments</span>
+      <span>Public Foundations</span>
+      <span>Mission Nonprofits</span>
+      <span>Federal Programs</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MISSION ============ -->
+<section class="section mission" id="mission">
+  <div class="wrap">
+    <div class="mission-image reveal">
+      <img src="https://beaconstrat.com/wp-content/uploads/2026/04/glass-sphere-on-marble-surface.jpg" alt="Glass sphere reflecting clarity">
+      <span class="badge">Rooted in Purpose</span>
+    </div>
+    <div class="mission-content reveal">
+      <span class="eyebrow">Our Purpose</span>
+      <h2 class="display">Strategy and policy that <em>moves</em> people's everyday lives.</h2>
+      <div class="mv-block">
+        <div class="mv-label">Our Mission</div>
+        <div class="mv-text">To help public-sector organizations deliver services more effectively and equitably, so that public policies and programs improve people's everyday lives.</div>
+      </div>
+      <div class="mv-block">
+        <div class="mv-label">Our Vision</div>
+        <div class="mv-text">A future where government works effectively and equitably for everyone — delivering services that measurably improve lives and create generational impact.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Core Services</span>
+        <h2 class="display">Three ways we <em>partner</em> with you.</h2>
+      </div>
+      <p>Every engagement is built around one of three modes — building the systems your work depends on, advising the strategy that guides it, or proving the impact you've delivered. Tap a card to see what's inside.</p>
+    </div>
+
+    <div class="service-cards" id="cards">
+      <!-- BUILD -->
+      <article class="card reveal" data-card="build">
+        <button class="card-toggle" aria-label="Expand">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1V13M1 7H13" stroke="#0e1e2f" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <span class="card-num">01 — Build</span>
+        <h3>What we <em>build</em></h3>
+        <p class="card-blurb">We design and stand up the operational backbone — the data systems, processes, and policy frameworks that let your team run reliably at scale.</p>
+        <div class="card-tags">
+          <span class="tag">Data Systems</span>
+          <span class="tag">Operational Infrastructure</span>
+          <span class="tag">Policy Frameworks</span>
+        </div>
+        <div class="card-expand">
+          <div class="card-expand-inner">
+            <h4>Representative Deliverables</h4>
+            <ul>
+              <li>Data warehouse and reporting architecture</li>
+              <li>Standard operating procedures and intake workflows</li>
+              <li>Policy frameworks aligned to federal &amp; state requirements</li>
+              <li>Stakeholder governance and accountability structures</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ADVISE -->
+      <article class="card reveal" data-card="advise" style="transition-delay: 0.1s">
+        <button class="card-toggle" aria-label="Expand">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1V13M1 7H13" stroke="#0e1e2f" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <span class="card-num">02 — Advise</span>
+        <h3>What we <em>advise</em></h3>
+        <p class="card-blurb">We sit alongside leadership to shape the direction of the work — translating policy into strategy, and strategy into programs your community can feel.</p>
+        <div class="card-tags">
+          <span class="tag">Public Policy</span>
+          <span class="tag">Organizational Strategy</span>
+          <span class="tag">Program Design</span>
+        </div>
+        <div class="card-expand">
+          <div class="card-expand-inner">
+            <h4>Representative Deliverables</h4>
+            <ul>
+              <li>Multi-year strategic plans with measurable milestones</li>
+              <li>Policy briefs and legislative impact analysis</li>
+              <li>Program theories of change and logic models</li>
+              <li>Executive coaching and board advisory</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROVE -->
+      <article class="card reveal" data-card="prove" style="transition-delay: 0.2s">
+        <button class="card-toggle" aria-label="Expand">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1V13M1 7H13" stroke="#0e1e2f" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <span class="card-num">03 — Prove</span>
+        <h3>What we <em>prove</em></h3>
+        <p class="card-blurb">We measure what's working, what isn't, and what's worth scaling — turning operational data into evidence funders, leadership, and the public can trust.</p>
+        <div class="card-tags">
+          <span class="tag">Performance</span>
+          <span class="tag">Efficiency</span>
+          <span class="tag">Measurable Impact</span>
+        </div>
+        <div class="card-expand">
+          <div class="card-expand-inner">
+            <h4>Representative Deliverables</h4>
+            <ul>
+              <li>Outcome evaluations and impact assessments</li>
+              <li>Performance dashboards for executive and board reporting</li>
+              <li>Cost-effectiveness and ROI analyses</li>
+              <li>Equity audits and disparity analyses</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAGNOSTIC ============ -->
+<section class="section diagnostic" id="diagnostic">
+  <div class="wrap">
+    <span class="eyebrow">Find Your Fit · 60 seconds</span>
+    <h2 class="display">Which engagement is <em>right</em> for your organization?</h2>
+    <p class="intro">Three quick questions. We'll point you to the service that fits your moment — and an honest sense of where to start.</p>
+
+    <div class="progress" id="progress">
+      <span class="current"></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="diag-stage" id="diagStage">
+
+      <!-- STEP 1 -->
+      <div class="diag-step active" data-step="1">
+        <div class="diag-q">What does your organization need most right now?</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-q="1" data-val="build">
+            <span class="num">Option 01</span>
+            <span class="label">Build new systems</span>
+            <span class="desc">We need infrastructure, processes, or policy scaffolding to run reliably.</span>
+          </button>
+          <button class="diag-opt" data-q="1" data-val="advise">
+            <span class="num">Option 02</span>
+            <span class="label">Set our direction</span>
+            <span class="desc">We need strategic guidance, policy clarity, or program design.</span>
+          </button>
+          <button class="diag-opt" data-q="1" data-val="prove">
+            <span class="num">Option 03</span>
+            <span class="label">Prove our impact</span>
+            <span class="desc">We need to measure outcomes and report what we've delivered.</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="diag-step" data-step="2">
+        <div class="diag-q">What's your timeline?</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-q="2" data-val="urgent">
+            <span class="num">Option 01</span>
+            <span class="label">Immediate</span>
+            <span class="desc">We need movement in the next few weeks — a deadline, a board meeting, a crisis.</span>
+          </button>
+          <button class="diag-opt" data-q="2" data-val="quarter">
+            <span class="num">Option 02</span>
+            <span class="label">This quarter</span>
+            <span class="desc">We're scoping a project that will run over the next two to four months.</span>
+          </button>
+          <button class="diag-opt" data-q="2" data-val="long">
+            <span class="num">Option 03</span>
+            <span class="label">Long-term</span>
+            <span class="desc">We're planning a multi-quarter or multi-year transformation.</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="diag-step" data-step="3">
+        <div class="diag-q">What size is your organization?</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-q="3" data-val="small">
+            <span class="num">Option 01</span>
+            <span class="label">Small</span>
+            <span class="desc">Under 50 staff. Lean team, big mission, limited internal capacity.</span>
+          </button>
+          <button class="diag-opt" data-q="3" data-val="mid">
+            <span class="num">Option 02</span>
+            <span class="label">Mid-size</span>
+            <span class="desc">50 to 500 staff. Growing complexity, multiple programs or departments.</span>
+          </button>
+          <button class="diag-opt" data-q="3" data-val="large">
+            <span class="num">Option 03</span>
+            <span class="label">Large</span>
+            <span class="desc">500+ staff. Agency-scale or multi-jurisdiction.</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="diag-result" data-result="build">
+        <span class="diag-result-tag">Recommended · Build</span>
+        <h3>You're ready to <em>build the foundation</em>.</h3>
+        <p>Based on your answers, your starting point is operational. We'd begin by mapping your current data flows and identifying the one or two systems that, once stood up well, will unlock everything else. That usually looks like a focused 8–12 week engagement.</p>
+        <div class="diag-result-actions">
+          <a href="#cta" class="btn btn-primary">Schedule a 30-minute scoping call →</a>
+          <a href="#services" class="btn btn-ghost">See full Build services</a>
+        </div>
+      </div>
+      <div class="diag-result" data-result="advise">
+        <span class="diag-result-tag">Recommended · Advise</span>
+        <h3>You need <em>direction before delivery</em>.</h3>
+        <p>Your situation calls for advisory work — a clear strategy, policy frame, or program design before more systems get built. We'd start with a short discovery sprint to map stakeholders and constraints, then deliver a strategic frame your leadership can act on.</p>
+        <div class="diag-result-actions">
+          <a href="#cta" class="btn btn-primary">Schedule a 30-minute scoping call →</a>
+          <a href="#services" class="btn btn-ghost">See full Advise services</a>
+        </div>
+      </div>
+      <div class="diag-result" data-result="prove">
+        <span class="diag-result-tag">Recommended · Prove</span>
+        <h3>It's time to <em>show what works</em>.</h3>
+        <p>You've done the work — now the question is evidence. We'd start by aligning on the outcomes that matter most to your funders and leadership, then build the measurement and reporting layer that makes impact legible. Most Prove engagements run 6–10 weeks.</p>
+        <div class="diag-result-actions">
+          <a href="#cta" class="btn btn-primary">Schedule a 30-minute scoping call →</a>
+          <a href="#services" class="btn btn-ghost">See full Prove services</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag-nav" id="diagNav">
+      <button class="diag-back" id="diagBack" disabled>← Back</button>
+      <button class="diag-next" id="diagNext" disabled>Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote">
+  <div class="wrap reveal">
+    <span class="quote-mark">"</span>
+    <blockquote>You are the light of the world. A city that is set on a hill <em>cannot be hidden</em>.</blockquote>
+    <cite>— Matthew 5:14</cite>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section why">
+  <div class="wrap">
+    <div class="why-image reveal">
+      <img src="https://beaconstrat.com/wp-content/uploads/2026/04/pen.webp" alt="Pen on document">
+    </div>
+    <div class="why-content reveal">
+      <span class="eyebrow">Why Choose Us</span>
+      <h2 class="display">A consulting partner that <em>shows up</em> like public service.</h2>
+      <ul class="why-list">
+        <li>
+          <span class="why-num">i.</span>
+          <div class="why-item">
+            <h4>Public-service driven</h4>
+            <p>We come from the work. Our recommendations are grounded in what actually moves agencies, not in abstract frameworks.</p>
+          </div>
+        </li>
+        <li>
+          <span class="why-num">ii.</span>
+          <div class="why-item">
+            <h4>Government-ready &amp; data-driven</h4>
+            <p>Every deliverable is built to survive procurement, council review, and the public record — with the evidence to back it.</p>
+          </div>
+        </li>
+        <li>
+          <span class="why-num">iii.</span>
+          <div class="why-item">
+            <h4>Detail-oriented &amp; strategic</h4>
+            <p>We zoom from the policy memo to the dashboard to the daily standup, because that's where outcomes actually live.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA / NEWSLETTER ============ -->
+<section class="cta-band" id="cta">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--beacon)">Ready when you are</span>
+    <h2>Let's turn your information into <em>action</em>.</h2>
+    <p>Get our quarterly newsletter — practical strategy and policy insight for public-sector leaders. Or skip ahead and book a consultation.</p>
+    <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thank you ✓'">
+      <input type="email" placeholder="your.email@agency.gov" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <div style="margin-top: 32px">
+      <a href="#" class="btn btn-ghost" style="color:var(--parchment);border-color:rgba(245,239,226,0.4)">Or schedule a consultation →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark"></span>
+          <span class="brand-name">Beacon Strategy Consulting</span>
+        </a>
+        <p>Strategy and policy rooted in purpose. Helping public-sector organizations turn information into action since 2024.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#">Case Studies</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Engage</h5>
+        <ul>
+          <li><a href="#diagnostic">Find Your Fit</a></li>
+          <li><a href="#cta">Schedule</a></li>
+          <li><a href="#cta">Newsletter</a></li>
+          <li><a href="#">Insights</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">Atlanta, GA</a></li>
+          <li><a href="tel:4045008769">404-500-8769</a></li>
+          <li><a href="mailto:francesca@beaconstrat.com">francesca@beaconstrat.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Beacon Strategy Consulting. All rights reserved.</span>
+      <span class="foot-faith">Jesus is King — All glory to Him.</span>
+      <span><a href="#" style="color: var(--ink-soft)">Privacy</a> · <a href="#" style="color: var(--ink-soft)">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Sticky nav state ----
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  });
+
+  // ---- Live time in dashboard ----
+  function updateTime(){
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    const el = document.getElementById('dashTime');
+    if (el) el.textContent = `${h}:${m}:${s} ET`;
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  // ---- Counter animation on intersection ----
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        function tick(now){
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(tick);
+        counterObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(c => counterObs.observe(c));
+
+  // ---- Reveal on scroll ----
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => revealObs.observe(r));
+
+  // ---- Service cards: expand one at a time ----
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    });
+  });
+
+  // ---- Diagnostic state machine ----
+  const answers = {1:null, 2:null, 3:null};
+  let currentStep = 1;
+  const totalSteps = 3;
+  const stepEls = document.querySelectorAll('.diag-step');
+  const progressEls = document.querySelectorAll('#progress span');
+  const backBtn = document.getElementById('diagBack');
+  const nextBtn = document.getElementById('diagNext');
+  const diagNav = document.getElementById('diagNav');
+
+  function renderStep(){
+    stepEls.forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.diag-result').forEach(r => r.classList.remove('active'));
+    document.querySelector(`.diag-step[data-step="${currentStep}"]`).classList.add('active');
+    progressEls.forEach((p, i) => {
+      p.classList.remove('current','done');
+      if (i + 1 < currentStep) p.classList.add('done');
+      if (i + 1 === currentStep) p.classList.add('current');
+    });
+    backBtn.disabled = currentStep === 1;
+    nextBtn.disabled = !answers[currentStep];
+    nextBtn.textContent = currentStep === totalSteps ? 'See your fit →' : 'Next →';
+  }
+
+  document.querySelectorAll('.diag-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.dataset.q;
+      const val = opt.dataset.val;
+      answers[q] = val;
+      // Visual select
+      document.querySelectorAll(`.diag-opt[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      nextBtn.disabled = false;
+    });
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      renderStep();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!answers[currentStep]) return;
+    if (currentStep < totalSteps) {
+      currentStep++;
+      renderStep();
+    } else {
+      // Show result
+      stepEls.forEach(s => s.classList.remove('active'));
+      const result = answers[1]; // primary driver of recommendation
+      document.querySelector(`.diag-result[data-result="${result}"]`).classList.add('active');
+      progressEls.forEach(p => { p.classList.remove('current'); p.classList.add('done'); });
+      diagNav.style.display = 'none';
+    }
+  });
+
+  renderStep();
+</script>
+
+</body>
+</html>
